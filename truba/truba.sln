@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "truba", "truba\truba.vcxproj", "{1691A3E8-3388-4164-AA56-7AB771FBA423}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1691A3E8-3388-4164-AA56-7AB771FBA423}.Debug|x64.ActiveCfg = Debug|x64
+		{1691A3E8-3388-4164-AA56-7AB771FBA423}.Debug|x64.Build.0 = Debug|x64
+		{1691A3E8-3388-4164-AA56-7AB771FBA423}.Debug|x86.ActiveCfg = Debug|Win32
+		{1691A3E8-3388-4164-AA56-7AB771FBA423}.Debug|x86.Build.0 = Debug|Win32
+		{1691A3E8-3388-4164-AA56-7AB771FBA423}.Release|x64.ActiveCfg = Release|x64
+		{1691A3E8-3388-4164-AA56-7AB771FBA423}.Release|x64.Build.0 = Release|x64
+		{1691A3E8-3388-4164-AA56-7AB771FBA423}.Release|x86.ActiveCfg = Release|Win32
+		{1691A3E8-3388-4164-AA56-7AB771FBA423}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AF158AEE-B42E-4A9F-B575-A5620D4C02E0}
+	EndGlobalSection
+EndGlobal
