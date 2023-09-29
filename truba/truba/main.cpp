@@ -1,6 +1,11 @@
-#include <iostream>
+ï»¿#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <windows.h>
 
 using namespace std;
+std::ofstream out;
 
 struct truba {
 	string name;
@@ -16,111 +21,254 @@ struct ks {
 	string effectivness;
 };
 
-void trubaChange() {
+void trubaChange(truba& pipe) {
 	int point = 0;
-	string newName;
-	int newDlina;
-	int newDiam;
-	string newStatus;
-	truba tom;
-	while (point != 5) {
-		cout << "Âûáåðèòå, ÷òî âû õîòèòå ñäåëàòü:" << endl << "1) Èçìåíèòü èìÿ" << endl << "2) Èçìåíèòü äëèííó" << endl
-			<< "3) Èçìåíèòü äèàìåòð" << endl << "4) Èçìåíèòü ñòàòóñ" << endl << "Äëÿ çàâåðøåíèÿ ðåäàêòèðîâàíèÿ íàæìèòå 5" << endl;
-		cin >> point;
-		if (point == 1) {
-			cout << "Ââåäèòå íîâîå èìÿ: ";
-			cin >> newName;
-			tom.name = newName;
-			point = 0;
-			cout << tom.name;
+	string newName = pipe.name;
+	int newDlina = pipe.dlina;
+	int newDiam = pipe.diam;
+	string newStatus = pipe.status;
+	if (pipe.dlina > 0) {
+		while (point != 5) {
+			cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾ Ð²Ñ‹ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ ÑÐ´ÐµÐ»Ð°Ñ‚ÑŒ:" << endl << "1) Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð¸Ð¼Ñ" << endl << "2) Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð´Ð»Ð¸Ð½Ð½Ñƒ" << endl
+				<< "3) Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð´Ð¸Ð°Ð¼ÐµÑ‚Ñ€" << endl << "4) Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ ÑÑ‚Ð°Ñ‚ÑƒÑ" << endl << "Ð”Ð»Ñ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ñ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ Ð½Ð°Ð¶Ð¼Ð¸Ñ‚Ðµ 5" << endl;
+			cin >> point;
+			switch (point) {
+			case 1:
+				cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð²Ð¾Ðµ Ð¸Ð¼Ñ: ";
+				cin >> newName;
+				pipe.name = newName;
+				point = 0;
+				cout << pipe.name;
+				break;
+
+			case 2:
+				cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð²ÑƒÑŽ Ð´Ð»Ð¸Ð½Ð½Ñƒ: ";
+				cin >> newDlina;
+				pipe.dlina = newDlina;
+				point = 0;
+				break;
+
+			case 3:
+				cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð²Ñ‹Ð¹ Ð´Ð¸Ð°Ð¼ÐµÑ‚Ñ€: ";
+				cin >> newDiam;
+				pipe.diam = newDiam;
+				point = 0;
+				break;
+
+			case 4:
+				cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð²Ñ‹Ð¹ ÑÑ‚Ð°Ñ‚ÑƒÑ: ";
+				cin >> newStatus;
+				pipe.status = newStatus;
+				point = 0;
+				break;
+			}
 		}
-		if (point == 2) {
-			cout << "Ââåäèòå íîâóþ äëèííó: ";
-			cin >> newDlina;
-			tom.dlina = newDlina;
-			point = 0;
-		}
-		if (point == 3) {
-			cout << "Ââåäèòå íîâûé äèàìåòð: ";
-			cin >> newDiam;
-			tom.diam = newDiam;
-			point = 0;
-		}
-		if (point == 4) {
-			cout << "Ââåäèòå íîâûé ñòàòóñ: ";
-			cin >> newStatus;
-			tom.status = newStatus;
-			point = 0;
+		pipe = { newName, newDlina, newDiam, newStatus };
+	}
+}
+
+void ksChange(ks& kas) {
+	int point = 0;
+	string newName = kas.name;
+	int newCehNumber = kas.cehNumber;
+	int newCehWorkNumber = kas.cehWorkNumber;
+	string newEffectivness = kas.effectivness;
+	if (newCehNumber > 0) {
+		while (point != 5) {
+			cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ, Ñ‡Ñ‚Ð¾ Ð²Ñ‹ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ ÑÐ´ÐµÐ»Ð°Ñ‚ÑŒ:" << endl << "1) Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð¸Ð¼Ñ" << endl << "2) Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ†ÐµÑ…Ð¾Ð²" << endl
+				<< "3) Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ€Ð°Ð±Ð¾Ñ‡Ð¸Ñ… Ñ†ÐµÑ…Ð¾Ð²" << endl << "4) Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ ÑÑ„Ñ„ÐµÐºÑ‚Ð¸Ð²Ð½Ð¾ÑÑ‚ÑŒ" << endl << "Ð”Ð»Ñ Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ñ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ Ð½Ð°Ð¶Ð¼Ð¸Ñ‚Ðµ 5" << endl;
+			cin >> point;
+			switch (point) {
+				case 1:
+					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð²Ð¾Ðµ Ð¸Ð¼Ñ: ";
+					cin >> newName;
+					kas.name = newName;
+					point = 0;
+					break;
+
+				case 2:
+					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð²ÑƒÑŽ Ð´Ð»Ð¸Ð½Ð½Ñƒ: ";
+					cin >> newCehNumber;
+					kas.cehNumber = newCehNumber;
+					point = 0;
+					break;
+
+				case 3:
+					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð²Ñ‹Ð¹ Ð´Ð¸Ð°Ð¼ÐµÑ‚Ñ€: ";
+					cin >> newCehWorkNumber;
+					kas.cehWorkNumber = newCehWorkNumber;
+					point = 0;
+					break;
+
+				case 4:
+					cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð²Ñ‹Ð¹ ÑÑ‚Ð°Ñ‚ÑƒÑ: ";
+					cin >> newEffectivness;
+					kas.effectivness = newEffectivness;
+					point = 0;
+					break;
+			}
 		}
 	}
 }
 
-void ksChange() {
-	int point = 0;
-	string newName;
-	int newCehNumber;
-	int newCehWorkNumber;
-	string newEffectivness;
-	ks tom;
-	while (point != 5) {
-		cout << "Âûáåðèòå, ÷òî âû õîòèòå ñäåëàòü:" << endl << "1) Èçìåíèòü èìÿ" << endl << "2) Èçìåíèòü êîëè÷åñòâî öåõîâ" << endl
-			<< "3) Èçìåíèòü êîëè÷åñòâî ðàáî÷èõ öåõîâ" << endl << "4) Èçìåíèòü ýôôåêòèâíîñòü" << endl << "Äëÿ çàâåðøåíèÿ ðåäàêòèðîâàíèÿ íàæìèòå 5" << endl;
-		cin >> point;
-		if (point == 1) {
-			cout << "Ââåäèòå íîâîå èìÿ: ";
-			cin >> newName;
-			tom.name = newName;
-			point = 0;
+void vivod(truba pipe, ks kas) {
+	cout << "*************************************" << endl;
+	if (pipe.dlina > 0) {
+		cout << "Ð¢Ñ€ÑƒÐ±Ð°:" << endl;
+		cout << "Ð˜Ð¼Ñ: " << pipe.name << endl;
+		cout << "Ð”Ð»Ð¸Ð½Ð°: " << pipe.dlina << endl;
+		cout << "Ð”Ð¸Ð°Ð¼ÐµÑ‚Ñ€: " << pipe.diam << endl;
+		cout << "Ð¡Ñ‚Ð°Ñ‚ÑƒÑ: " << pipe.status << endl;
+	}
+	cout << "*************************************" << endl;
+	if (kas.cehNumber > 0) {
+		cout << "ÐšÐ¡:" << endl;
+		cout << "Ð˜Ð¼Ñ: " << kas.name << endl;
+		cout << "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ†ÐµÑ…Ð¾Ð²: " << kas.cehNumber << endl;
+		cout << "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ€Ð°Ð±Ð¾Ñ‡Ð¸Ñ… Ñ†ÐµÑ…Ð¾Ð²: " << kas.cehWorkNumber << endl;
+		cout << "Ð­Ñ„Ñ„ÐµÐºÑ‚Ð¸Ð²Ð½Ð¾ÑÑ‚ÑŒ: " << kas.effectivness << endl;
+	}
+	cout << "*************************************" << endl;
+}
+
+void addTruba(truba& pipe) {
+	string name;
+	int dlina;
+	int diam;
+	string status;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ:" << endl;
+	cin >> name;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð»Ð¸Ð½Ñƒ:" << endl;
+	cin >> dlina;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð¸Ð°Ð¼ÐµÑ‚Ñ€:" << endl;
+	cin >> diam;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑ‚Ð°Ñ‚ÑƒÑ:" << endl;
+	cin >> status;
+	pipe = {name, dlina, diam, status};
+}
+
+void addKs(ks& kas) {
+	string name;
+	int cehNumber;
+	int cehWorkNumber;
+	string effectivness;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ:" << endl;
+	cin >> name;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ†ÐµÑ…Ð¾Ð²:" << endl;
+	cin >> cehNumber;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ€Ð°Ð±Ð¾Ñ‡Ð¸Ñ… Ñ†ÐµÑ…Ð¾Ð²:" << endl;
+	cin >> cehWorkNumber;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÑ„Ñ„ÐµÐºÑ‚Ð¸Ð²Ð½Ð¾ÑÑ‚ÑŒ:" << endl;
+	cin >> effectivness;
+	kas = {name, cehNumber, cehWorkNumber, effectivness};
+}
+void save(truba& pipe, ks& kas) {
+	out.open("trubki.txt");
+	if (out.is_open()) {
+		if (pipe.dlina > 0) {
+			out << "*************************************" << endl;
+			out << "Ð¢Ñ€ÑƒÐ±Ð°:" << endl;
+			out << "Ð˜Ð¼Ñ: " << pipe.name << endl;
+			out << "Ð”Ð»Ð¸Ð½Ð°: " << pipe.dlina << endl;
+			out << "Ð”Ð¸Ð°Ð¼ÐµÑ‚Ñ€: " << pipe.diam << endl;
+			out << "Ð¡Ñ‚Ð°Ñ‚ÑƒÑ: " << pipe.status << endl;
+			out << "*************************************" << endl;
 		}
-		if (point == 2) {
-			cout << "Ââåäèòå íîâóþ äëèííó: ";
-			cin >> newCehNumber;
-			tom.cehNumber = newCehNumber;
-			point = 0;
+		if (kas.cehNumber > 0) {
+			out << "*************************************" << endl;
+			out << "ÐšÐ¡:" << endl;
+			out << "Ð˜Ð¼Ñ: " << kas.name << endl;
+			out << "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ†ÐµÑ…Ð¾Ð²: " << kas.cehNumber << endl;
+			out << "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ€Ð°Ð±Ð¾Ñ‡Ð¸Ñ… Ñ†ÐµÑ…Ð¾Ð²: " << kas.cehWorkNumber << endl;
+			out << "Ð­Ñ„Ñ„ÐµÐºÑ‚Ð¸Ð²Ð½Ð¾ÑÑ‚ÑŒ: " << kas.effectivness << endl;
+			out << "*************************************" << endl;
 		}
-		if (point == 3) {
-			cout << "Ââåäèòå íîâûé äèàìåòð: ";
-			cin >> newCehWorkNumber;
-			tom.cehWorkNumber = newCehWorkNumber;
-			point = 0;
-		}
-		if (point == 4) {
-			cout << "Ââåäèòå íîâûé ñòàòóñ: ";
-			cin >> newEffectivness;
-			tom.effectivness = newEffectivness;
-			point = 0;
+	}
+	out.close();
+	cout << "Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¾!" << endl << endl;
+}
+
+void load(truba& pipe, ks& kas) {
+	string line;
+	ifstream in("load.txt");
+	int n = 0;
+	if (in.is_open()) {
+		while (getline(in, line))
+		{
+			switch (n) {
+			case 0:
+				pipe.name = line;
+				break;
+			case 1:
+				pipe.dlina = stoi(line);
+				break;
+			case 2:
+				pipe.diam = stoi(line);
+				break;
+			case 3:
+				pipe.name = line;
+				break;
+			case 4:
+				break;
+			case 5:
+				kas.name = line;
+				break;
+			case 6:
+				kas.cehNumber = stoi(line);
+				break;
+			case 7:
+				kas.cehWorkNumber = stoi(line);
+				break;
+			case 9:
+				kas.effectivness = line;
+				break;
+			default:
+				break;
+			}
+			n += 1;
 		}
 	}
 }
-void vivod() {
-	truba vtom;
-	ks vbon;
-	cout << "*************************************" << endl;
-	cout << "Òðóáà:" << endl << "Èìÿ: " << vtom.name << endl << "Äëèíà: " << vtom.dlina << endl << "Äèàìåòð: " << vtom.diam <<
-		endl << "Ñòàòóñ: " << vtom.status << endl;
-	cout << "*************************************" << endl;
-	cout << "ÊÑ:" << endl << "Èìÿ: " << vbon.name << endl << "Êîëè÷åñòâî öåõîâ: " << vbon.cehNumber << endl << 
-		"Êîëè÷åñòâî ðàáî÷èõ öåõîâ: " << vbon.cehWorkNumber << endl << "Ýôôåêòèâíîñòü: " << vbon.effectivness << endl;
-	cout << "*************************************" << endl;
-}
 int main() {
 	int point;
+	truba pipe;
+	ks kas;
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	setlocale(LC_ALL, "Russian");
 	while (true) {
-		setlocale(LC_ALL, "Russian");
-		cout << "Âûáåðèòå ÷òî âû õîòèòå ñäåëàòü:" << endl << "1) Èçìåíèòü òðóáó" << endl << "2) Èçìåíèòü ÊÑ" << endl <<
-			"3) Âûâåñòè äàííûå" << endl;
+		
+		cout << "Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ñ‡Ñ‚Ð¾ Ð²Ñ‹ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ ÑÐ´ÐµÐ»Ð°Ñ‚ÑŒ:" << endl << "1) Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ñ‚Ñ€ÑƒÐ±Ñƒ" << endl << "2) Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÐšÐ¡" << endl <<
+			"3) ÐŸÑ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€ Ð²ÑÐµÑ… Ð¾Ð±ÑŠÐµÐºÑ‚Ð¾Ð²" << endl << "4) Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ‚Ñ€ÑƒÐ±Ñƒ" << endl << "5) Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÐºÑ" << endl <<
+			"6) Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ" << endl << "7) Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ" << endl << "0) Ð’Ñ‹Ñ…Ð¾Ð´" << endl;
 		cin >> point;
-		if (point == 1) {
-			trubaChange();
-		}
-		else if (point == 2) {
-			ksChange();
-		}
-		else if (point == 3) {
-			vivod();
-		}
-		else {
-			cout << "Âû ââåëè íåâåðíîå çíà÷åíèå, ïîïðîáóéòå ñíîâà";
+		switch (point){
+		case 1:
+			addTruba(pipe);
+			break;
+		case 2:
+			addKs(kas);
+			break;
+		case 3:
+			vivod(pipe, kas);
+			break;
+		case 4:
+			trubaChange(pipe);
+			break;
+		case 5:
+			ksChange(kas);
+			break;
+		case 6:
+			save(pipe, kas);
+			break;
+		case 7:
+			load(pipe, kas);
+			break;
+		case 0:
+			return 0;
+			break;
+		default:
+			break;
 		}
 	}
 }
