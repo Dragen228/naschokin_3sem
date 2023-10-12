@@ -5,12 +5,13 @@
 #include <windows.h>
 
 using namespace std;
-std::ofstream out;
+std::ofstream out; // создавать переменную типа файл внутри функции
+// поправить вывод в файл, слов в файле не должно быть
 
 struct truba {
 	string name;
-	int dlina;
-	int diam;
+	float dlina;
+	float diam;
 	string status;
 };
 
@@ -24,8 +25,8 @@ struct ks {
 void trubaChange(truba& pipe) {
 	int point = 0;
 	string newName = pipe.name;
-	int newDlina = pipe.dlina;
-	int newDiam = pipe.diam;
+	float newDlina = pipe.dlina;
+	float newDiam = pipe.diam;
 	string newStatus = pipe.status;
 	if (pipe.dlina > 0) {
 		while (point != 5) {
@@ -44,14 +45,24 @@ void trubaChange(truba& pipe) {
 			case 2:
 				cout << "Введите новую длинну: ";
 				cin >> newDlina;
-				pipe.dlina = newDlina;
+				if (newDlina > 0){
+					pipe.dlina = newDlina;
+				}
+				else {
+					cout << "Вы ввели неверное значение" << endl;
+				}
 				point = 0;
 				break;
 
 			case 3:
 				cout << "Введите новый диаметр: ";
 				cin >> newDiam;
-				pipe.diam = newDiam;
+				if (newDiam > 0) {
+					pipe.diam = newDiam;
+				}
+				else {
+					cout << "Вы ввели неверное значение" << endl;
+				}
 				point = 0;
 				break;
 
@@ -87,16 +98,26 @@ void ksChange(ks& kas) {
 					break;
 
 				case 2:
-					cout << "Введите новую длинну: ";
+					cout << "Введите новое число цехов: ";
 					cin >> newCehNumber;
-					kas.cehNumber = newCehNumber;
+					if (newCehNumber >= 0) {
+						kas.cehNumber = newCehNumber;
+					}
+					else {
+						cout << "Вы ввели неверное значение" << endl;
+					}
 					point = 0;
 					break;
 
 				case 3:
-					cout << "Введите новый диаметр: ";
+					cout << "Введите новое число рабочих цехов: ";
 					cin >> newCehWorkNumber;
-					kas.cehWorkNumber = newCehWorkNumber;
+					if (0 <= newCehWorkNumber && newCehWorkNumber <= newCehNumber) {
+						kas.cehWorkNumber = newCehWorkNumber;
+					}
+					else {
+						cout << "Вы ввели неверное значение" << endl;
+					}
 					point = 0;
 					break;
 
@@ -133,15 +154,23 @@ void vivod(truba pipe, ks kas) {
 
 void addTruba(truba& pipe) {
 	string name;
-	int dlina;
-	int diam;
+	float dlina;
+	float diam;
 	string status;
 	cout << "Введите имя:" << endl;
 	cin >> name;
 	cout << "Введите длину:" << endl;
 	cin >> dlina;
+	if (dlina <= 0) {
+		cout << "Введите длину большую нуля:" << endl;
+		cin >> dlina;
+	}
 	cout << "Введите диаметр:" << endl;
 	cin >> diam;
+	if (diam <= 0) {
+		cout << "Введите диаметр большую нуля:" << endl;
+		cin >> diam;
+	}
 	cout << "Введите статус:" << endl;
 	cin >> status;
 	pipe = {name, dlina, diam, status};
@@ -156,12 +185,21 @@ void addKs(ks& kas) {
 	cin >> name;
 	cout << "Введите количество цехов:" << endl;
 	cin >> cehNumber;
+	if (cehNumber <= 0) {
+		cout << "Введите количество цехов, большее нуля:" << endl;
+		cin >> cehNumber;
+	}
 	cout << "Введите количество рабочих цехов:" << endl;
 	cin >> cehWorkNumber;
+	if (0 <= cehWorkNumber && cehWorkNumber >= cehNumber) {
+		cout << "Введите нормальное количество рабочих цехов:" << endl;
+		cin >> cehWorkNumber;
+	}
 	cout << "Введите эффективность:" << endl;
 	cin >> effectivness;
 	kas = {name, cehNumber, cehWorkNumber, effectivness};
 }
+
 void save(truba& pipe, ks& kas) {
 	out.open("trubki.txt");
 	if (out.is_open()) {
@@ -233,16 +271,19 @@ int main() {
 	int point;
 	truba pipe;
 	ks kas;
+	string x;
+	string d = "qwertyuiopasdfghjklzxcvbnm";
+	bool flag = true;
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	setlocale(LC_ALL, "Russian");
 	while (true) {
-		
+
 		cout << "Выберите что вы хотите сделать:" << endl << "1) Добавить трубу" << endl << "2) Добавить КС" << endl <<
 			"3) Просмотр всех объектов" << endl << "4) Редактировать трубу" << endl << "5) Редактировать кс" << endl <<
 			"6) Сохранить" << endl << "7) Загрузить" << endl << "0) Выход" << endl;
 		cin >> point;
-		switch (point){
+		switch (point) {
 		case 1:
 			addTruba(pipe);
 			break;
