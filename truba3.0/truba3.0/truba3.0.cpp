@@ -67,7 +67,7 @@ void trubaChange(truba& pipe) {
 				break;
 
 			case 4:
-				cout << "Введите новый статус: ";
+				cout << "Введите  статус: ";
 				cin >> newStatus;
 				pipe.status = newStatus;
 				point = 0;
