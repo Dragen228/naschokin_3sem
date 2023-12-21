@@ -1,0 +1,73 @@
+6 6
+Pipe:
+0
+pipe 1
+1
+500
+0
+Pipe:
+1
+pipe 33
+10
+700
+0
+Pipe:
+3
+pipe 12
+4
+500
+0
+Pipe:
+4
+ppp
+1
+500
+0
+Pipe:
+5
+ugi
+1
+700
+0
+Pipe:
+6
+ugi2
+11
+500
+0
+Compressor station:
+0
+cs
+45
+32
+A
+Compressor station:
+1
+cs 34s
+50
+10
+D
+Compressor station:
+2
+gh
+43
+4
+A
+Compressor station:
+3
+cs 4 
+54
+43
+A
+Compressor station:
+4
+cs 5
+56
+43
+D
+Compressor station:
+5
+new cs
+67
+5
+D
